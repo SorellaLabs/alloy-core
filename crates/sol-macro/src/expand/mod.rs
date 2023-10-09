@@ -365,6 +365,7 @@ impl<'ast> ExpCtxt<'ast> {
     /// Formats the given name as a function's call Rust struct name.
     fn raw_call_name(&self, function_name: impl quote::IdentFragment + std::fmt::Display) -> Ident {
         let mut new_ident = format_ident!("{function_name}Call");
+
         if let Some(span) = function_name.span() {
             new_ident.set_span(span);
         }

@@ -72,7 +72,6 @@ impl From<Ident> for SolIdent {
 
 impl From<SolIdent> for Ident {
     fn from(value: SolIdent) -> Self {
-        // value.0
         let str = value.0.to_string();
         if RUST_KEYWORD_SET_DIFFERENCE.contains(&str.as_str()) {
             Ident::new_raw(&str, value.span())

@@ -187,7 +187,7 @@ impl<'a> CallLikeExpander<'a> {
     ) -> Self {
         let variants: Vec<_> = functions
             .iter()
-            .map(|&f| cx.overloaded_name(f.into()).0)
+            .map(|&f| cx.overloaded_name(f.into()).into())
             .collect();
 
         let types: Vec<_> = variants.iter().map(|name| cx.raw_call_name(name)).collect();
