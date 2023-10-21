@@ -49,19 +49,19 @@ proptest-derive = { workspace = true, optional = true }
 
 [dev-dependencies]
 bincode.workspace = true
-serde.workspace= true
+serde.workspace = true
 serde_json.workspace = true
 
 [features]
 default = ["std"]
 std = [
-    "bytes/std",
-    "hex/std",
-    "ruint/std",
-    "alloy-rlp?/std",
-    "proptest?/std",
-    "rand?/std",
-    "serde?/std",
+  "bytes/std",
+  "hex/std",
+  "ruint/std",
+  "alloy-rlp?/std",
+  "proptest?/std",
+  "rand?/std",
+  "serde?/std",
 ]
 tiny-keccak = []
 native-keccak = []
@@ -70,13 +70,13 @@ rand = ["dep:rand", "getrandom"]
 rlp = ["dep:alloy-rlp", "ruint/alloy-rlp", "ruint/rlp"]
 serde = ["dep:serde", "bytes/serde", "hex/serde", "ruint/serde"]
 arbitrary = [
-    "std",
-    "ruint/arbitrary",
-    "ruint/proptest",
-    "dep:arbitrary",
-    "dep:derive_arbitrary",
-    "dep:proptest",
-    "dep:proptest-derive",
+  "std",
+  "ruint/arbitrary",
+  "ruint/proptest",
+  "dep:arbitrary",
+  "dep:derive_arbitrary",
+  "dep:proptest",
+  "dep:proptest-derive",
 ]
 
 # `const-hex` compatibility feature for `hex`.
