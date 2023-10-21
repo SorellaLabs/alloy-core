@@ -8,59 +8,12 @@ const MAX_BITS: usize = 55 * 8;
 impl<const BITS: usize, const LIMBS: usize> Encodable for Signed<BITS, LIMBS> {
     #[inline]
     fn length(&self) -> usize {
-        let bits = self.0.bit_len();
-        if bits <= 7 {
-            1
-        } else {
-            let bytes = (bits + 7) / 8;
-            bytes + length_of_length(bytes)
-        }
+        self.0.length()
     }
 
     #[inline]
     fn encode(&self, out: &mut dyn BufMut) {
-        // fast paths, avoiding allocation due to `to_be_bytes_vec`
-        match LIMBS {
-            0 => return out.put_u8(EMPTY_STRING_CODE),
-            1 => return self.0.as_limbs()[0].encode(out),
-            #[allow(clippy::cast_lossless)]
-            2 => {
-                return (self.0.as_limbs()[0] as u128 | ((self.0.as_limbs()[1] as u128) << 64))
-                    .encode(out)
-            }
-            _ => {}
-        }
-
-        match self.0.bit_len() {
-            0 => out.put_u8(EMPTY_STRING_CODE),
-            1..=7 => {
-                #[allow(clippy::cast_possible_truncation)] // self < 128
-                out.put_u8(self.0.as_limbs()[0] as u8);
-            }
-            bits => {
-                // avoid heap allocation in `to_be_bytes_vec`
-                // SAFETY: we don't re-use `copy`
-                #[cfg(target_endian = "little")]
-                let mut copy = *&self.0;
-                #[cfg(target_endian = "little")]
-                let bytes = unsafe { copy.as_le_slice_mut() };
-                #[cfg(target_endian = "little")]
-                bytes.reverse();
-
-                #[cfg(target_endian = "big")]
-                let bytes = self.0.to_be_bytes_vec();
-
-                let leading_zero_bytes = Self::BYTES - (bits + 7) / 8;
-                let trimmed = &bytes[leading_zero_bytes..];
-                if bits > MAX_BITS {
-                    trimmed.encode(out);
-                } else {
-                    #[allow(clippy::cast_possible_truncation)] // bytes.len() < 56 < 256
-                    out.put_u8(EMPTY_STRING_CODE + trimmed.len() as u8);
-                    out.put_slice(trimmed);
-                }
-            }
-        }
+        self.0.encode(out)
     }
 }
 
