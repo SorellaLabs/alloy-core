@@ -82,7 +82,8 @@ mod tests {
     use super::*;
     use bytes::BytesMut;
 
-    pub fn test_rlp() {
+    #[test]
+    pub fn rlp_small() {
         let signed_int: Signed<64, 1> = Signed::from_dec_str("-1260332").unwrap();
 
         let mut buf = BytesMut::new();
@@ -90,6 +91,20 @@ mod tests {
         let freezed = buf.freeze();
         let mut rlp = freezed.as_ref();
         let result: Signed<64, 1> = Signed::decode(&mut rlp).unwrap();
+
+        assert_eq!(result, signed_int);
+    }
+
+    #[test]
+    pub fn rlp_big() {
+        let signed_int: Signed<256, 4> =
+            Signed::from_dec_str("-1260332358234975439857342953478925").unwrap();
+
+        let mut buf = BytesMut::new();
+        signed_int.encode(&mut buf);
+        let freezed = buf.freeze();
+        let mut rlp = freezed.as_ref();
+        let result: Signed<256, 4> = Signed::decode(&mut rlp).unwrap();
 
         assert_eq!(result, signed_int);
     }
