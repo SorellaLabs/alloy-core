@@ -23,7 +23,7 @@ pub use sign::Sign;
 mod serde;
 
 #[cfg(feature = "rlp")]
-mod rlp;
+pub mod rlp;
 
 /// Utility functions used in the signed integer implementation.
 pub(crate) mod utils;
