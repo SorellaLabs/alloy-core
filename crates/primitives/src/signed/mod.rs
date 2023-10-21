@@ -22,5 +22,8 @@ pub use sign::Sign;
 #[cfg(feature = "serde")]
 mod serde;
 
+#[cfg(feature = "rlp")]
+mod rlp;
+
 /// Utility functions used in the signed integer implementation.
 pub(crate) mod utils;

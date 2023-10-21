@@ -49,6 +49,7 @@ proptest-derive = { workspace = true, optional = true }
 
 [dev-dependencies]
 bincode.workspace = true
+serde.workspace= true
 serde_json.workspace = true
 
 [features]
