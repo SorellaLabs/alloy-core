@@ -67,7 +67,7 @@ tiny-keccak = []
 native-keccak = []
 getrandom = ["dep:getrandom"]
 rand = ["dep:rand", "getrandom"]
-rlp = ["dep:alloy-rlp", "ruint/alloy-rlp", "ruint/rlp"]
+rlp = ["dep:alloy-rlp", "ruint/alloy-rlp"]
 serde = ["dep:serde", "bytes/serde", "hex/serde", "ruint/serde"]
 arbitrary = [
   "std",
