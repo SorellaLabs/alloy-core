@@ -20,6 +20,9 @@ impl<const BITS: usize, const LIMBS: usize> Encodable for Signed<BITS, LIMBS> {
 impl<const BITS: usize, const LIMBS: usize> Decodable for Signed<BITS, LIMBS> {
     #[inline]
     fn decode(buf: &mut &[u8]) -> Result<Self, DecodeError> {
+        //TODO: decode as unsigned
+        //convert to signed type
+    
         let header = Header::decode(buf)?;
         if header.list {
             return Err(DecodeError::UnexpectedList)
