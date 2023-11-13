@@ -270,7 +270,7 @@ impl ToSol for Fallback {
             name: None,
             inputs: &[],
             visibility: Some(Visibility::External),
-            state_mutability: Some(self.state_mutability),
+            state_mutability: self.state_mutability,
             anonymous: false,
             outputs: &[],
         }
@@ -285,7 +285,7 @@ impl ToSol for Receive {
             name: None,
             inputs: &[],
             visibility: Some(Visibility::External),
-            state_mutability: Some(self.state_mutability),
+            state_mutability: self.state_mutability,
             anonymous: false,
             outputs: &[],
         }
@@ -300,7 +300,7 @@ impl ToSol for Function {
             name: Some(&self.name),
             inputs: &self.inputs,
             visibility: Some(Visibility::External),
-            state_mutability: Some(self.state_mutability),
+            state_mutability: self.state_mutability,
             anonymous: false,
             outputs: &self.outputs,
         }

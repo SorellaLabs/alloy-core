@@ -442,10 +442,7 @@ impl Constructor {
     /// assert_eq!(
     ///     Constructor::parse("constructor(uint foo, address bar)"),
     ///     Ok(Constructor {
-    ///         inputs: vec![
-    ///             Param::parse("uint foo").unwrap(),
-    ///             Param::parse("address bar").unwrap()
-    ///         ],
+    ///         inputs: vec![Param::parse("uint foo").unwrap(), Param::parse("address bar").unwrap()],
     ///         state_mutability: Some(StateMutability::NonPayable),
     ///         payable: None,
     ///     }),
